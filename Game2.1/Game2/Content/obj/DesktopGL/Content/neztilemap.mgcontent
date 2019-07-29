@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SourceFile>C:/Users/PCArtem/source/repos/Game2.1/Game2/Content/../../../../../Documents/Game Development/Tiled/neztilemap.tmx</SourceFile>
+  <SourceTime>2019-02-10T12:41:28.6109917-08:00</SourceTime>
+  <DestFile>C:/Users/PCArtem/source/repos/Game2.1/Game2/Content/bin/DesktopGL/Content/neztilemap.xnb</DestFile>
+  <DestTime>2019-07-29T15:54:23.1768961-07:00</DestTime>
+  <Importer>TiledMapImporter</Importer>
+  <ImporterTime>2019-02-09T18:15:55.5600738-08:00</ImporterTime>
+  <Processor>TiledMapProcessor</Processor>
+  <ProcessorTime>2019-02-09T18:15:55.5600738-08:00</ProcessorTime>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>
