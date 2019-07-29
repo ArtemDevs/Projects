@@ -1,0 +1,165 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Nez.PipelineImporter</name>
+    </assembly>
+    <members>
+        <member name="F:Nez.TiledMaps.TmxTilesetTile.sourceRect">
+            <summary>
+            source Rectangle for tilesets that use the collection of images
+            </summary>
+        </member>
+        <member name="F:Nez.BitmapFontImporter.BitmapFontFile.file">
+            <summary>
+            the full path to the fnt font
+            </summary>
+        </member>
+        <member name="F:Nez.BitmapFontImporter.BitmapFontPage.x">
+            <summary>
+            not part of fnt spec. this is manually added.
+            </summary>
+        </member>
+        <member name="F:Nez.BitmapFontImporter.BitmapFontPage.y">
+            <summary>
+            not part of fnt spec. this is manually added.
+            </summary>
+        </member>
+        <member name="F:Nez.TexturePackerImporter.TexturePackerFile.spriteAnimationDetails">
+            <summary>
+            stores a map of the name of the sprite animation (derived from texturepacker filename metadata) to an array. 
+            Each entry in the list refers to index of the corresponding subtexture
+            </summary>
+        </member>
+        <member name="T:Nez.TextureAtlasGenerator.TextureAtlasPacker">
+            <summary>
+            Helper for arranging many small sprites into a single larger sheet.
+            </summary>
+        </member>
+        <member name="M:Nez.TextureAtlasGenerator.TextureAtlasPacker.packSprites(System.Collections.Generic.IList{Microsoft.Xna.Framework.Content.Pipeline.Graphics.BitmapContent},System.Collections.Generic.ICollection{Microsoft.Xna.Framework.Rectangle},System.Boolean,Microsoft.Xna.Framework.Content.Pipeline.ContentProcessorContext)">
+            <summary>
+            Packs a list of sprites into a single big texture,
+            recording where each one was stored.
+            </summary>
+        </member>
+        <member name="M:Nez.TextureAtlasGenerator.TextureAtlasPacker.copySpritesToOutput(System.Collections.Generic.List{Nez.TextureAtlasGenerator.TextureAtlasPacker.ArrangedSprite},System.Collections.Generic.IList{Microsoft.Xna.Framework.Content.Pipeline.Graphics.BitmapContent},System.Collections.Generic.ICollection{Microsoft.Xna.Framework.Rectangle},System.Int32,System.Int32)">
+            <summary>
+            Once the arranging is complete, copies the bitmap data for each
+            sprite to its chosen position in the single larger output bitmap.
+            </summary>
+        </member>
+        <member name="T:Nez.TextureAtlasGenerator.TextureAtlasPacker.ArrangedSprite">
+            <summary>
+            Internal helper class keeps track of a sprite while it is being arranged.
+            </summary>
+        </member>
+        <member name="M:Nez.TextureAtlasGenerator.TextureAtlasPacker.positionSprite(System.Collections.Generic.List{Nez.TextureAtlasGenerator.TextureAtlasPacker.ArrangedSprite},System.Int32,System.Int32)">
+            <summary>
+            Works out where to position a single sprite.
+            </summary>
+        </member>
+        <member name="M:Nez.TextureAtlasGenerator.TextureAtlasPacker.findIntersectingSprite(System.Collections.Generic.List{Nez.TextureAtlasGenerator.TextureAtlasPacker.ArrangedSprite},System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Checks if a proposed sprite position collides with anything
+            that we already arranged.
+            </summary>
+        </member>
+        <member name="M:Nez.TextureAtlasGenerator.TextureAtlasPacker.compareSpriteSizes(Nez.TextureAtlasGenerator.TextureAtlasPacker.ArrangedSprite,Nez.TextureAtlasGenerator.TextureAtlasPacker.ArrangedSprite)">
+            <summary>
+            Comparison function for sorting sprites by size.
+            </summary>
+        </member>
+        <member name="M:Nez.TextureAtlasGenerator.TextureAtlasPacker.compareSpriteIndices(Nez.TextureAtlasGenerator.TextureAtlasPacker.ArrangedSprite,Nez.TextureAtlasGenerator.TextureAtlasPacker.ArrangedSprite)">
+            <summary>
+            Comparison function for sorting sprites by their original indices.
+            </summary>
+        </member>
+        <member name="M:Nez.TextureAtlasGenerator.TextureAtlasPacker.guessOutputWidth(System.Collections.Generic.List{Nez.TextureAtlasGenerator.TextureAtlasPacker.ArrangedSprite})">
+            <summary>
+            Heuristic guesses what might be a good output width for a list of sprites.
+            </summary>
+        </member>
+        <member name="T:Nez.TextureAtlasGenerator.TextureAtlasContent">
+            <summary>
+            Build-time type used to hold the output data from the SpriteSheetProcessor.
+            This is serialized into XNB format, then at runtime, the ContentManager
+            loads the data into a SpriteSheet object.
+            </summary>
+        </member>
+        <member name="F:Nez.TextureAtlasGenerator.TextureAtlasContent.texture">
+            <summary>
+            Single texture contains many separate sprite images.
+            </summary>
+        </member>
+        <member name="F:Nez.TextureAtlasGenerator.TextureAtlasContent.spriteRectangles">
+            <summary>
+            Remember where in the texture each sprite has been placed.
+            </summary>
+        </member>
+        <member name="F:Nez.TextureAtlasGenerator.TextureAtlasContent.spriteNames">
+            <summary>
+            Store the original sprite filenames, so we can look up sprites by name.
+            </summary>
+        </member>
+        <member name="F:Nez.TextureAtlasGenerator.TextureAtlasContent.spriteAnimationDetails">
+            <summary>
+            stores the folder name (ie animation name) and a point. The point.x represents the index of the first frame
+            and point.y is the last frame. The indexes are for the spriteRectangles array
+            </summary>
+        </member>
+        <member name="F:Nez.TextureAtlasGenerator.TextureAtlasContent.nineSliceSplits">
+            <summary>
+            optional nine-slice padding for a sprite
+            </summary>
+        </member>
+        <member name="T:Nez.TextureAtlasGenerator.TextureAtlasProcessor">
+            <summary>
+            Custom content processor takes an array of individual sprite filenames (which
+            will typically be imported from an XML file), reads them all into memory,
+            arranges them onto a single larger texture, and returns the resulting sprite
+            sheet object.
+            </summary>
+        </member>
+        <member name="M:Nez.TextureAtlasGenerator.TextureAtlasProcessor.Process(System.String[],Microsoft.Xna.Framework.Content.Pipeline.ContentProcessorContext)">
+            <summary>
+            Converts an array of sprite filenames into a texture atlas object.
+            </summary>
+        </member>
+        <member name="M:Nez.TextureAtlasGenerator.TextureAtlasProcessor.processNinePatchTexture(Microsoft.Xna.Framework.Content.Pipeline.Graphics.TextureContent)">
+            <summary>
+            locates the black pixels from a nine patch image and sets the splits for this image
+            </summary>
+            <param name="texture">Texture.</param>
+        </member>
+        <member name="T:Nez.XmlTemplateMaker.XmlTemplateMakerProcessor">
+            <summary>
+            Simple little importer that's sole purpose is to print out a template XML file for any class. The template XML can then be used to
+            create custom XML-to-object importers in just a few lines of code. See the bottom of this file for an example.
+            
+            The XML file passed to this processor should just be a System.string with the namespace.class of the type that you want a tempalate for.
+            The template will be dumped to the Pipeline console but note that it will have utf-16 instead of utf-8 so you need to change that.
+            
+            Lots of attributes are available for dealing with the XML parsing. You can find a great document on the attributes available
+            here: http://blogs.msdn.com/b/shawnhar/archive/2008/08/12/everything-you-ever-wanted-to-know-about-intermediateserializer.aspx
+            </summary>
+        </member>
+        <member name="M:Nez.LibGdxAtlases.LibGdxAtlasImporter.readTuple(System.IO.StreamReader)">
+            Returns the number of tuple values read (1, 2 or 4). 
+        </member>
+        <member name="F:Nez.LibGdxAtlases.LibGdxAtlasRegion.splits">
+            <summary>
+            nine patch details in this order: left, right, top, bottom
+            </summary>
+        </member>
+        <member name="M:Nez.PipelineImporter.PathHelper.makeRelativePath(System.String,System.String)">
+            <summary>
+            Creates a relative path from one file or folder to another.
+            </summary>
+            <param name="fromPath">Contains the directory that defines the start of the relative path.</param>
+            <param name="toPath">Contains the path that defines the endpoint of the relative path.</param>
+            <returns>The relative path from the start directory to the end path or <c>toPath</c> if the paths are not related.</returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <exception cref="T:System.UriFormatException"></exception>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+    </members>
+</doc>
